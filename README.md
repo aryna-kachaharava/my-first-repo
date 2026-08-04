@@ -11,3 +11,7 @@
 * Контроль версий и инструменты: Git, GitHub, VS Code, Google Colab
 
 * Базы данных и API: SQL, ChromaDB, REST API
+
+# Контакты
+
+Мои пет-проекты на гите **https://github.com/aryna-kachaharava**
