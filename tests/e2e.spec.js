@@ -13,7 +13,7 @@ test('successful login and purchase', async ({ page }) => {
  
     const inventoryPage=new InventoryPage(page);
     const pageTitle=await inventoryPage.getPageTitle();
-    await expect(pageTitle).toBe('Products');
+    await expect(inventoryPage.pageTitle).toHaveText('Products');
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
     await inventoryPage.sortItems('hilo');
