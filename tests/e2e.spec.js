@@ -31,7 +31,7 @@ test('successful login and purchase', async ({ page }) => {
     const checkoutStepOnePage=new CheckoutStepOnePage(page);
     await checkoutStepOnePage.fillUserInfo('Test','User','12345');
     await checkoutStepOnePage.clickContinueButton();
-
+    
     const checkoutStepTwoPage=new CheckoutStepTwoPage(page);
     await checkoutStepTwoPage.finishCheckout();
 
