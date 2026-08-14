@@ -1,8 +1,8 @@
 import {test,expect} from '@playwright/test';
 
 test.describe.serial('API tests for Restful-booker',()=>{
-    const baseURL='https://restful-booker.herokuapp.com';
-    const bookingData={
+    const baseURL = 'https://restful-booker.herokuapp.com';
+    const bookingData = {
             "firstname" : "Jim",
             "lastname" : "Brown",
             "totalprice" : 111,
@@ -13,7 +13,7 @@ test.describe.serial('API tests for Restful-booker',()=>{
             },
             "additionalneeds" : "Breakfast"
         };
-    const updatedBookingData={
+    const updatedBookingData = {
             "firstname" : "Anothername",
             "lastname" : "Brown",
             "totalprice" : 222,
@@ -26,12 +26,12 @@ test.describe.serial('API tests for Restful-booker',()=>{
         }; 
     let bookingId;
     let token;
-    test('Create booking',async({request})=>{
-        const response=await request.post(`${baseURL}/booking`,{
+    test('Create booking', async({request})=>{
+        const response = await request.post(`${baseURL}/booking`, {
             data: bookingData
         });
         expect(response.status()).toBe(200);
-        const responseBody=await response.json();
+        const responseBody = await response.json();
         expect(responseBody).toHaveProperty('bookingid');
         expect(responseBody.booking).toMatchObject(bookingData);
 
@@ -39,39 +39,39 @@ test.describe.serial('API tests for Restful-booker',()=>{
     })
     
     test('Get info about booking',async({request})=>{
-        const response=await request.get(`${baseURL}/booking/${bookingId}`);
+        const response = await request.get(`${baseURL}/booking/${bookingId}`);
         expect(response.status()).toBe(200);
-        const responseBody=await response.json();
+        const responseBody = await response.json();
         expect(responseBody).toMatchObject(bookingData);
 
     })
 
-    test('Update booking',async({request})=>{
+    test('Update booking', async({request})=>{
         const authData={
             'username':'admin',
             'password':'password123'
         }
         
-        const authToken=await request.post(`${baseURL}/auth`,{data: authData})
+        const authToken = await request.post(`${baseURL}/auth`,{data: authData})
         expect(authToken.status()).toBe(200);
-        const authTokenBody=await authToken.json();
+        const authTokenBody = await authToken.json();
         token=authTokenBody.token;
-        const response=await request.put(`${baseURL}/booking/${bookingId}`,{
+        const response=await request.put(`${baseURL}/booking/${bookingId}`, {
             headers:{Cookie:`token=${token}`},
             data:updatedBookingData
         })
         expect(response.status()).toBe(200);
-        const responseBody=await response.json();
+        const responseBody = await response.json();
         expect(responseBody).toMatchObject(updatedBookingData);
     })
 
     test('Delete booking',async({request})=>{
-        const response=await request.delete(`${baseURL}/booking/${bookingId}`,{
+        const response = await request.delete(`${baseURL}/booking/${bookingId}`,{
             headers:{Cookie:`token=${token}`}
         })
         expect(response.status()).toBe(201);
 
-        const response_check =await request.get(`${baseURL}/booking/${bookingId}`);
+        const response_check = await request.get(`${baseURL}/booking/${bookingId}`);
         expect(response_check.status()).toBe(404);
     })
 

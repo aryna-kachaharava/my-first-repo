@@ -19,7 +19,7 @@ export class InventoryPage{
     }
 
     async getPageTitle(){
-        return await this.pageTitle.textContent();
+        return this.pageTitle.textContent();
     }
 
     async sortItems(option){
