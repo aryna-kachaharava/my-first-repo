@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('successful login to system', async ({ page }) => {
+test('successful login to system @ui', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   const usernameInput = page.locator('#user-name');
   await usernameInput.fill('standard_user');
@@ -15,7 +15,7 @@ test('successful login to system', async ({ page }) => {
   await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html')
 });
 
-test('failed login to system', async ({ page }) => {
+test('failed login to system @ui', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   const usernameInput = page.locator('#user-name');
   await usernameInput.fill('locked_out_user');

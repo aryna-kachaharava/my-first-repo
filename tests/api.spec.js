@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-test.describe.serial('API tests for Restful-booker',()=>{
+test.describe.serial('API tests for Restful-booker @api',()=>{
     const baseURL = 'https://restful-booker.herokuapp.com';
     const bookingData = {
             "firstname" : "Jim",
@@ -26,7 +26,7 @@ test.describe.serial('API tests for Restful-booker',()=>{
         }; 
     let bookingId;
     let token;
-    test('Create booking', async({request})=>{
+    test('Create booking @api', async({request})=>{
         const response = await request.post(`${baseURL}/booking`, {
             data: bookingData
         });
@@ -38,7 +38,7 @@ test.describe.serial('API tests for Restful-booker',()=>{
        bookingId=responseBody.bookingid;
     })
     
-    test('Get info about booking',async({request})=>{
+    test('Get info about booking @api',async({request})=>{
         const response = await request.get(`${baseURL}/booking/${bookingId}`);
         expect(response.status()).toBe(200);
         const responseBody = await response.json();
@@ -46,7 +46,7 @@ test.describe.serial('API tests for Restful-booker',()=>{
 
     })
 
-    test('Update booking', async({request})=>{
+    test('Update booking @api', async({request})=>{
         const authData={
             'username':'admin',
             'password':'password123'
@@ -65,7 +65,7 @@ test.describe.serial('API tests for Restful-booker',()=>{
         expect(responseBody).toMatchObject(updatedBookingData);
     })
 
-    test('Delete booking',async({request})=>{
+    test('Delete booking @api',async({request})=>{
         const response = await request.delete(`${baseURL}/booking/${bookingId}`,{
             headers:{Cookie:`token=${token}`}
         })
